@@ -20,7 +20,9 @@ def api_call(path)
     JSON.parse(data)
   end
 end
+result = []
 ARGV.each do |name|
   json = api_call("/repos/boxen/puppet-#{name}/tags")
-  puts "#{name} #{json[0]['name']}"
+  result << %Q{github "#{name}", "#{json[0]['name']}"}
 end
+result.sort.each { |result| puts result }
